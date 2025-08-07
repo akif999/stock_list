@@ -28,7 +28,7 @@ def main():
         "./testdata/data_j.xls",
         sheet_name="Sheet1"
     )
-    df_jpxs = df[[CODE, NAME]]
+    df_jpxs = df[[CODE, NAME, I_CLASS33, I_CLASS17, S_DISTINCTION]]
 
     # diff codes
     private_stock_infos = df_private.copy()
@@ -54,17 +54,24 @@ def main():
     for i, p_row in private_stock_infos.iterrows():
         info = {
             'code': p_row[CODE],
-            'name': p_row[NAME]
+            'name': p_row[NAME],
+            'i_class33': '',
+            'i_class17': '',
+            's_distinction': ''
         }
         j_row = jpx_stock_infos[jpx_stock_infos[CODE] == p_row[CODE]]
         if (not j_row.empty):
-            if j_row.iloc[0][NAME] != p_row[NAME]:
+            j_row = j_row.iloc[0]
+            if j_row[NAME] != p_row[NAME]:
                 print(f"{p_row[CODE]}", end=': ')
-                print(f"{p_row[NAME]} -> {j_row.iloc[0][NAME]}")
-                info['name'] = j_row.iloc[0][NAME]
+                print(f"{p_row[NAME]} -> {j_row[NAME]}")
+                info['name'] = j_row[NAME]
             else:
                 pass
                 # print('names are same')
+            info['i_class33'] = j_row[I_CLASS33]
+            info['i_class17'] = j_row[I_CLASS17]
+            info['s_distinction'] = j_row[S_DISTINCTION]
         else:
             pass
             # print('code is nothing in jpx')
@@ -73,7 +80,8 @@ def main():
     print()
     print("merged names")
     for info in merged_info:
-        print(f"{info['code']}\t{info['name']}")
+        print(
+            f"{info['code']}\t{info['name']}\t{info['i_class33']}\t{info['i_class17']}\t{info['s_distinction']}")
 
 
 if __name__ == '__main__':
