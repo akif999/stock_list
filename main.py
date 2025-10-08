@@ -82,25 +82,25 @@ def update_stock_list():
         print(f"{p_row[CODE]}", end=': ')
         if (not j_row.empty):
             j_row = j_row.iloc[0]
-            if j_row[NAME] != p_row[NAME]:
-                print(f"{p_row[NAME]} -> {j_row[NAME]}", end='')
+            if j_row[NAME] != info['name']:
+                print(f"{info['name']} -> {j_row[NAME]}", end='')
                 info['name'] = j_row[NAME]
-            if j_row[I_CLASS33] != p_row[I_CLASS33]:
-                print(f"{p_row[I_CLASS33]} -> {j_row[I_CLASS33]}", end='')
+            if j_row[I_CLASS33] != info['i_class33']:
+                print(f"{info['i_class33']} -> {j_row[I_CLASS33]}", end='')
                 info['i_class33'] = j_row[I_CLASS33]
             # if not ETF
             if info['i_class33'] != '-':
-                if j_row[I_CLASS17] != p_row[I_CLASS17]:
-                    print(f"{p_row[I_CLASS17]} -> {j_row[I_CLASS17]}", end='')
-                    info['i_class17'] = j_row[I_CLASS17]
-                if j_row[S_DISTINCTION] != p_row[S_DISTINCTION]:
+                if j_row[I_CLASS17] != info['i_class17']:
                     print(
-                        f"{p_row[S_DISTINCTION]} -> {j_row[S_DISTINCTION]}", end='')
+                        f"{info['i_class17']} -> {j_row[I_CLASS17]}", end='')
+                    info['i_class17'] = j_row[I_CLASS17]
+                if j_row[S_DISTINCTION] != info['i_class17']:
+                    print(
+                        f"{info['s_distinction']} -> {j_row[S_DISTINCTION]}", end='')
                     info['s_distinction'] = j_row[S_DISTINCTION]
                 if info['summary'] == 'nan':
                     pass
                 if info['url'] == 'nan':
-                    print("xxxx", file=sys.stderr)
                     info['url'] = yf.Ticker(
                         info['code']+".T"
                     ).info.get("website", "N/A")
