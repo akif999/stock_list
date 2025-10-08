@@ -15,7 +15,10 @@ def main():
     # pprint(t.info)
     # h = t.history(period="1mo")
     # print(h.head())
+    print("done.")
 
+
+def update_stock_list():
     # extract list data
     pd.set_option('display.max_rows', None)
     pd.set_option('display.max_columns', None)
