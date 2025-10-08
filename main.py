@@ -1,5 +1,5 @@
 from pprint import pprint
-# import yfinance as yf
+import yfinance as yf
 import pandas as pd
 
 CODE = 'コード'
@@ -11,6 +11,14 @@ S_DISTINCTION = '規模区分'
 
 def main():
     # yfinance sample request
+    codes = []
+    with open("./codes.txt", "r", encoding="utf-8") as f:
+        for line in f:
+            codes.append(line.strip())
+    for code in codes:
+        t = yf.Ticker(code+".T")
+        url = t.info.get("website", "N/A")
+        print(code + " " + url)
     # t = yf.Ticker("7203.T")
     # pprint(t.info)
     # h = t.history(period="1mo")
